@@ -7,11 +7,9 @@ import { useRouter } from "next/router";
 
 
 const style = {
-    wrapper: `flex-[0.7] flex px-8 flex-col`,
-    twitterIconContainer: `text-3xl m-4`,
-    tweetButton: `bg-[#1d9bf0] hover:bg-[#1b8cd8] flex items-center justify-center font-bold rounded-3xl h-[50px] mt-[20px] cursor-pointer`,
+    wrapper: `flex-[1] flex px-8 flex-col`,
     navContainer: `flex-1`,
-    profileButton: `flex items-center mb-6 cursor-pointer hover:bg-[#333c45] rounded-[100px] p-2`,
+    profileButton: `flex items-center mb-6 cursor-pointer rounded-[100px] p-2 hover:bg-[#363636]`,
     profileLeft: `flex item-center justify-center mr-4`,
     profileImage: `height-12 w-12 rounded-full`,
     profileRight: `flex-1 flex`,
@@ -40,7 +38,7 @@ function Sidebar({ initialSelectedIcon = "Home" }) {
           redirect={"/profile"}
         />
       </div>
-      <div className="absolute bottom-0">
+      <div className="absolute bottom-0 ">
         <div className={style.profileButton}>
           <div className={style.profileLeft}>
             <img

@@ -1,13 +1,13 @@
 import React,{useState,useContext} from 'react'
 
 const style = {
-    wrapper: `px-4 flex pb-4 w-[800px]`,
+    wrapper: `px-4 flex pb-4 w-2/3 mx-auto`,
     tweetBoxLeft: `mr-4`,
     tweetBoxRight: `flex-1`,
     profileImage: `height-12 w-12 rounded-full`,
-    inputField: `w-full h-full outline-none bg-transparent text-lg placeholder:italic placeholder:text-slate-400 py-2 pl-9 pr-3 `,
+    inputField: `w-full h-full outline-none bg-transparent text-lg placeholder:italic placeholder:text-slate-400 border-[#171717] border focus:border focus:border-[#38444d] resize-none py-2 pl-9 pr-3 `,
     formLowerContainer: `flex`,
-    submitGeneral: `px-8 py-2 rounded-3xl font-bold flex m-auto `,
+    submitGeneral: `px-8 py-2 rounded-3xl font-bold flex m-auto mt-1 `,
     inactiveSubmit: `bg-[#196195] text-[#95999e]`,
     activeSubmit: `bg-[#1d9bf0] text-white`,
   };
@@ -28,6 +28,7 @@ function PostBox() {
           <div className={style.tweetBoxRight}>
             <form>
               <textarea
+
                 className={style.inputField}
                 placeholder="Speak your mind"
                 value={Message}

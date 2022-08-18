@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 const style = {
-    wrapper: `w-min flex items-center rounded-[100px] m-10 p-4 cursor-pointer hover:bg-[#333c45] transition-all hover:duration-200 hover:ease-in-out`,
+    wrapper: `w-min flex items-center rounded-[100px] m-10 p-4 cursor-pointer hover:bg-[#363636] transition-all hover:duration-200 hover:ease-in-out`,
     iconContainer: `text-xl mr-4`,
     textGeneral: `font-medium`,
     textActive: `font-bold`,
