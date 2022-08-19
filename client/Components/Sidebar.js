@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { MyContext } from "../Context/MyContext";
 import { RiHome2Line, RiHome2Fill } from "react-icons/ri";
 import { AiOutlineMail, AiFillInstagram } from "react-icons/ai";
 import { customStyles } from "../lib/constants";
@@ -24,8 +25,8 @@ const style = {
   handle: `text-[#8899a6]`,
   moreContainer: `flex items-center mr-2`,
 };
-const account = "0xCBB6E40e415F913e1a6c4A8B50097cfD6B87E788";
 function Sidebar({ initialSelectedIcon = "Home" }) {
+  const {accountAddress} = useContext(MyContext)
   const router = useRouter();
   const [isPostModalOpen, setIsPostModalOpen] = useState(Boolean(false));
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(Boolean(false));
@@ -88,7 +89,7 @@ function Sidebar({ initialSelectedIcon = "Home" }) {
             <div className={style.details}>
               <div className={style.name}>Ilay Gilat</div>
               <div className={style.handle}>
-                @{account.slice(0, 6)}...{account.slice(-4)}
+                @{accountAddress.slice(0, 6)}...{accountAddress.slice(-4)}
               </div>
             </div>
           </div>

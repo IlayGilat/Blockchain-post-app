@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import {  useState,useContext } from 'react'
+import { MyContext  }  from '../../Context/MyContext'
 import Post from '../Post'
-import { useContext } from 'react'
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Divider } from '@chakra-ui/react'
 import NftImage from '../NftImage'
 const style = {
@@ -148,10 +148,9 @@ const NFTs = [
   },
 ]
 
-const currentAccount = "0xCBB6E40e415F913e1a6c4A8B50097cfD6B87E788"
 
-function ProfileBody() {
-
+const ProfileBody = () => {
+const {accountAddress} = useContext(MyContext)
   return (
      <div className={style.wrapper}>
    <Tabs variant='soft-rounded' className='m-5'>
@@ -167,7 +166,7 @@ function ProfileBody() {
           <Post 
           key={index}
           displayName="Ilay Gilat"
-          userName={`${currentAccount.slice(0,4)}...${currentAccount.slice(-4)}`}
+          userName={`${accountAddress.slice(0,4)}...${accountAddress.slice(-4)}`}
           text={tweet.text}
           avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s"
           timestamp={tweet.timestamp}

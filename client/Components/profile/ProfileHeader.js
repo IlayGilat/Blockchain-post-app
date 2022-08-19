@@ -1,8 +1,7 @@
 import { useRouter } from "next/router";
-import React from "react";
 import { useContext } from "react";
 import { BsArrowLeft } from "react-icons/bs";
-
+import {MyContext} from '../../Context/MyContext'
 const style = {
   wrapper: `border-[#38444d] border-b sticky top-0 bg-[#171717]`,
   backButton: `text-3xl cursor-pointer mr-2 rounded-full hover:bg-[#363636] p-1`,
@@ -14,8 +13,8 @@ const style = {
   profileImageNft: `object-cover h-full`,
   details: `px-3`,
 };
-const currentAccount = "0xCBB6E40e415F913e1a6c4A8B50097cfD6B87E788";
 function ProfileHeader() {
+  const {accountAddress} = useContext(MyContext)
   const router = useRouter();
   return (
     <div className={style.wrapper}>
@@ -34,9 +33,9 @@ function ProfileHeader() {
         <div>
           <div className={style.primary}>Ilay Gilat &bull; 4 Tweets</div>
           <div className={style.secondary}>
-            {currentAccount && (
+            {accountAddress && (
               <>
-                @{currentAccount.slice(0, 8)}...{currentAccount.slice(-4)}
+                @{accountAddress.slice(0, 8)}...{accountAddress.slice(-4)}
               </>
             )}
           </div>
