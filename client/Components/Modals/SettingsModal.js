@@ -8,6 +8,11 @@ const NFTs = [
       "https://lh3.googleusercontent.com/Luialoa5_3h5vd8xT7t2gZ0XZEPHgVmBpLjU3CCD3oHkpTd3cNkwAlv4rLyflIgwC-SFWjxYn8hoRKmzS50TN0co8oZX8mkM6I3crw=w600",
   },
   {
+    text: "Squod #21",
+    image:
+      "https://lh3.googleusercontent.com/Luialoa5_3h5vd8xT7t2gZ0XZEPHgVmBpLjU3CCD3oHkpTd3cNkwAlv4rLyflIgwC-SFWjxYn8hoRKmzS50TN0co8oZX8mkM6I3crw=w600",
+  },
+  {
     text: "Fuckawaii #377",
     image:
       "https://lh3.googleusercontent.com/z6_q9nNuhnkFZKCVWbPaWFjwwduU_lmz2yd98_0vIzLAeFC8qWls42oqb096SWS38L0UOKh9MXjXS9Dr7NIkP_yvgcQr3U13e3VDUQ=w600",
@@ -59,8 +64,8 @@ const style = {
   backButton: `text-4xl cursor-pointer mr-2 rounded-full hover:bg-[#363636] p-1 left-3 top-2 absolute`,
   content: `p-5`,
   inputField: `outline-none bg-transparent text-lg placeholder:text-slate-400  border  border-[#196195] resize-none py-2 pl-9 pr-3 `,
-  NFT: ` p-4 hover:bg-[#363636] hover:rounded-3xl cursor-pointer basis-1/3 flex `,
-  NftContainer: `flex flex-wrap `,
+  NFT: ` p-4 hover:bg-[#363636] hover:rounded-3xl cursor-pointer m-auto`,
+  NftContainer: `flex flex-wrap mb-5`,
   NameSetContainer: `flex mb-10`,
   submitGeneral: `px-8 py-2 rounded-3xl text-xl font-bold  flex mx-auto `,
   headerTitle: `text-xl font-bold text-center mb-5`,
