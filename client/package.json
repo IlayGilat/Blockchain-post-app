@@ -8,15 +8,16 @@
   "dependencies": {
     "@chakra-ui/icons": "^2.0.8",
     "@chakra-ui/react": "^2.2.8",
-    "@emotion/react": "^11",
-    "@emotion/styled": "^11",
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
     "alchemy-sdk": "^2.0.2",
-    "framer-motion": "^6",
+    "framer-motion": "^7.2.0",
     "next": "latest",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-icons": "^4.4.0",
-    "react-modal": "^3.15.1"
+    "react-modal": "^3.15.1",
+    "timeago.js": "^4.0.2"
   },
   "devDependencies": {
     "@types/node": "17.0.35",

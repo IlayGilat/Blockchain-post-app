@@ -1,7 +1,7 @@
 import React from "react";
 import { whoToFollow } from "../../lib/static";
 const style = {
-  wrapper: `p-4 my-auto`,
+  wrapper: `flex-[3] p-4 my-auto`,
   section: ` my-6 rounded-xl overflow-hidden`,
   title: `p-2 font-bold text-lg`,
   item: `flex items-center p-3  w-[250px] h-[100px] hover:bg-[#363636] cursor-pointer rounded-[100px] hover:duration-200 hover:ease-in-out`, 

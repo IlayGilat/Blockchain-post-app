@@ -4,7 +4,7 @@ import Sidebar from "../Components/sidebar";
 import Feed from "../Components/home/Feed";
 import Widgets from "../Components/home/Widgets";
 const style = {
-  wrapper: `flex h-screen w-screen  bg-[#171717] text-white `,
+  wrapper: `flex h-screen w-screen flex-row bg-[#171717] text-white `,
   content: ` w-2/3 flex flex-auto `,
   loginContainer: `w-full h-full flex flex-col justify-center items-center pb-48`,
   walletConnectButton: `text-2xl text-black bg-white font-bold mb-[-3rem] mt-[3rem] px-6 py-4 rounded-full cursor-pointer hover:bg-[#d7dbdc]`,
@@ -14,13 +14,13 @@ const Home: NextPage = () => {
   return (
     <div className={style.wrapper}>
       <div className={style.content}>
-        <div className="m-auto">
+        <div className="m-auto basis-1/6">
           <Sidebar />
         </div>
-        <div className="overflow-auto no-scrollbar border-r border-[#38444d] ">
+        <div className="overflow-auto no-scrollbar border-r border-[#38444d] basis-4/6 ">
           <Feed />
         </div>
-        <div className="m-auto">
+        <div className="m-auto basis-1/6">
         <Widgets />
         </div>
       </div>

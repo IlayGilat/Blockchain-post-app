@@ -7,6 +7,7 @@ import { IoPersonOutline, IoPerson, IoMailSharp } from "react-icons/io5";
 import SidebarOption from "./SidebarOption";
 import { useRouter } from "next/router";
 import Modal from "react-modal";
+import SettingsModal from '../Components/Modals/SettingsModal'
 import { BsTwitter, BsFacebook, BsTelegram } from "react-icons/bs";
 const style = {
   wrapper: `flex-[1] flex px-8 flex-col `,
@@ -27,6 +28,7 @@ const account = "0xCBB6E40e415F913e1a6c4A8B50097cfD6B87E788";
 function Sidebar({ initialSelectedIcon = "Home" }) {
   const router = useRouter();
   const [isPostModalOpen, setIsPostModalOpen] = useState(Boolean(false));
+  const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(Boolean(false));
   return (
     <div className={style.wrapper}>
       <div className="absolute top-5">
@@ -74,7 +76,7 @@ function Sidebar({ initialSelectedIcon = "Home" }) {
         </div>
       </div>
       <div className="absolute bottom-2">
-        <div className={style.profileButton}>
+        <div className={style.profileButton} onClick={() => setIsSettingsModalOpen(true)}>
           <div className={style.profileLeft}>
             <img
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s"
@@ -102,6 +104,15 @@ function Sidebar({ initialSelectedIcon = "Home" }) {
       >
         <PostModal setIsPostModalOpen={setIsPostModalOpen} />
       </Modal>
+      <Modal
+        isOpen={Boolean(isSettingsModalOpen)}
+        onRequestClose={() => setIsSettingsModalOpen(false)}
+        style={customStyles}
+        
+      >
+        <SettingsModal setIsSettingsModalOpen={setIsSettingsModalOpen} />
+      </Modal>
+
     </div>
   );
 }

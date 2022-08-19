@@ -4,16 +4,16 @@ import Sidebar from "../Components/Sidebar";
 import ProfileBody from "../Components/profile/ProfileBody";
 
 const style = {
-  wrapper: `flex justify-center h-screen w-screen select-none bg-[#171717] text-white`,
+  wrapper: `flex justify-center flex-row h-screen w-screen select-none bg-[#171717] text-white`,
   content: ` w-2/3 flex flex-auto`,
-  mainContent: `flex-[2] border-r border-l border-[#38444d] overflow-auto no-scrollbar`,
+  mainContent: `flex-[2] border-r border-l border-[#38444d] overflow-auto no-scrollbar basis-5/6`,
 };
 
 function profile() {
   return (
     <div className={style.wrapper}>
       <div className={style.content}>
-        <div className="m-auto">
+        <div className="m-auto basis-1/6">
           <Sidebar initialSelectedIcon="Profile" />
         </div>
         <div className={style.mainContent}>

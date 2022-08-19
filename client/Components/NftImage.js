@@ -1,10 +1,14 @@
 import React from "react";
 import { Image } from "@chakra-ui/react";
-const NftImage = ({ Name, ImageUrl }) => {
+const NftImage = ({ Name, ImageUrl,boxSize }) => {
   return (
-    <div className="">
-      <h2 className="font-bold text-center mb-3">{Name}</h2>
-      <Image borderRadius="3xl" boxSize="225px" src={ImageUrl} alt={Name} />
+    <div>
+    {  
+    Name !="" ? (
+    <h2 className="font-bold text-center mb-3">{Name}</h2>
+    ) : (<></>)
+    } 
+     <Image borderRadius="3xl" boxSize={`${boxSize}px`} src={ImageUrl} alt={Name} />
     </div>
   );
 };

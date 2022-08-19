@@ -95,7 +95,7 @@ const tweets = [
 ];
 
 const style = {
-  wrapper: `flex-[2] w-[1372px] border-r border-l border-[#38444d]`,
+  wrapper: `flex-[2] border-r border-l border-[#38444d]`,
   header: `sticky top-0 bg-[#171717] p-4 flex justify-between items-center`,
 };
 function Feed() {
