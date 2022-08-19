@@ -26,7 +26,7 @@ const style = {
   moreContainer: `flex items-center mr-2`,
 };
 function Sidebar({ initialSelectedIcon = "Home" }) {
-  const {accountAddress} = useContext(MyContext)
+  const {accountAddress,currentUser} = useContext(MyContext)
   const router = useRouter();
   const [isPostModalOpen, setIsPostModalOpen] = useState(Boolean(false));
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(Boolean(false));
@@ -87,7 +87,7 @@ function Sidebar({ initialSelectedIcon = "Home" }) {
           </div>
           <div className={style.profileRight}>
             <div className={style.details}>
-              <div className={style.name}>Ilay Gilat</div>
+              <div className={style.name}>{currentUser.name}</div>
               <div className={style.handle}>
                 @{accountAddress.slice(0, 6)}...{accountAddress.slice(-4)}
               </div>

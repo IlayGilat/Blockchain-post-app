@@ -14,7 +14,7 @@ const style = {
   details: `px-3`,
 };
 function ProfileHeader() {
-  const {accountAddress} = useContext(MyContext)
+  const {accountAddress,currentUser} = useContext(MyContext)
   const router = useRouter();
   return (
     <div className={style.wrapper}>
@@ -24,14 +24,14 @@ function ProfileHeader() {
         </div>
       <div className={style.profileImageContainer}>
         <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s"
+          src={currentUser.profileImage}
           alt="profile image"
           className={style.profileImage}
         />
       </div>
       <div className={style.details}>
         <div>
-          <div className={style.primary}>Ilay Gilat &bull; 4 Tweets</div>
+          <div className={style.primary}>Ilay Gilat &bull; {currentUser.tweets.length} Tweets</div>
           <div className={style.secondary}>
             {accountAddress && (
               <>

@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-import Head from "next/head";
 import Sidebar from "../Components/sidebar";
 import Feed from "../Components/home/Feed";
 import Widgets from "../Components/home/Widgets";
@@ -14,13 +13,13 @@ const Home: NextPage = () => {
   return (
     <div className={style.wrapper}>
       <div className={style.content}>
-        <div className="m-auto basis-1/6">
+        <div className="m-auto basis-1/12">
           <Sidebar />
         </div>
-        <div className="overflow-auto no-scrollbar border-r border-[#38444d] basis-4/6 ">
+        <div className="overflow-auto no-scrollbar border-r border-[#38444d] basis-10/12 ">
           <Feed />
         </div>
-        <div className="m-auto basis-1/6">
+        <div className="m-auto basis-1/12">
         <Widgets />
         </div>
       </div>
