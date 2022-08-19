@@ -58,7 +58,7 @@ const style = {
   wrapper: `h-[30rem] w-[70rem] text-white bg-[#171717] rounded-3xl p-10 overflow-auto no-scrollbar`,
   backButton: `text-4xl cursor-pointer mr-2 rounded-full hover:bg-[#363636] p-1 left-3 top-2 absolute`,
   content: `p-5`,
-  inputField: `outline-none bg-transparent text-lg placeholder:italic placeholder:text-slate-400  border  border-[#196195] resize-none py-2 pl-9 pr-3 `,
+  inputField: `outline-none bg-transparent text-lg placeholder:text-slate-400  border  border-[#196195] resize-none py-2 pl-9 pr-3 `,
   NFT: ` p-4 hover:bg-[#363636] hover:rounded-3xl cursor-pointer basis-1/3 flex `,
   NftContainer: `flex flex-wrap `,
   NameSetContainer: `flex mb-10`,
