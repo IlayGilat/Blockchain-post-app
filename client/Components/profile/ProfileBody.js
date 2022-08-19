@@ -179,7 +179,7 @@ function ProfileBody() {
           <div className={style.NftBody}>
           {
             NFTs.map((NFT,index) => (
-           <div className={style.NFT}>
+           <div className={style.NFT} key={index}>
              <NftImage Name={NFT.text} ImageUrl={NFT.image}/>
            </div>   
            

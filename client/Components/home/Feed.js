@@ -95,15 +95,13 @@ const tweets = [
 ];
 
 const style = {
-  wrapper: `flex-[2] w-[1300px] border-r border-l border-[#38444d]`,
-  header: `sticky top-0 bg-[#171717] z-10 p-4 flex justify-between items-center`,
-  headerTitle: `text-xl font-bold`,
+  wrapper: `flex-[2] w-[1372px] border-r border-l border-[#38444d]`,
+  header: `sticky top-0 bg-[#171717] p-4 flex justify-between items-center`,
 };
 function Feed() {
   return (
     <div className={style.wrapper}>
       <div className={style.header}>
-        <div className={style.headerTitle}>Home</div>
       </div>
       <div >
         <PostBox />

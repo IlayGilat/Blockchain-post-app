@@ -1,7 +1,7 @@
 import React from "react";
 import ProfileHeader from "../Components/profile/ProfileHeader";
-import ProfileTweets from "../Components/profile/ProfileTweets";
 import Sidebar from "../Components/Sidebar";
+import ProfileBody from "../Components/profile/ProfileBody";
 
 const style = {
   wrapper: `flex justify-center h-screen w-screen select-none bg-[#171717] text-white`,
@@ -13,14 +13,14 @@ function profile() {
   return (
     <div className={style.wrapper}>
       <div className={style.content}>
-        <div className=" m-auto">
+        <div className="m-auto">
           <Sidebar initialSelectedIcon="Profile" />
         </div>
         <div className={style.mainContent}>
           <ProfileHeader />
-            <ProfileTweets />
+            <ProfileBody />
+          </div>
         </div>
-      </div>
     </div>
   );
 }

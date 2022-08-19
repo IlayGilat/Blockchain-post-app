@@ -2,7 +2,7 @@ import React from "react";
 import { format } from "timeago.js";
 import Image from "next/image";
 const style = {
-  wrapper: `flex p-3 border w-2/3 m-auto mt-10 border-[#38444d]`,
+  wrapper: `flex p-3 border w-2/3 m-auto mt-10 border-[#38444d] rounded-[15px]`,
   profileImage: `rounded-full h-[40px] w-[40px] object-cover`,
   postMain: `flex-1 px-4`,
   headerDetails: `flex items-center`,

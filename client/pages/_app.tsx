@@ -16,7 +16,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     return <></>;
   } else {
   return (
+    <ChakraProvider>
             <Component {...pageProps} />
+    </ChakraProvider>
   );
 }}
 
