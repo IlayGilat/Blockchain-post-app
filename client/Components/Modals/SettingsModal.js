@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { BsArrowLeft } from "react-icons/bs";
+import { MyContext } from "../../Context/MyContext";
 import NftImage from "../NftImage";
 const NFTs = [
   {
@@ -73,6 +74,7 @@ const style = {
   activeSubmit: `bg-[#1d9bf0] text-white`,
 };
 function SettingsModal({ setIsSettingsModalOpen }) {
+  const {currentUser,setCurrentUserName} = useContext(MyContext)
   const [name, setName] = useState("");
   return (
     <div className={style.wrapper}>
@@ -93,14 +95,14 @@ function SettingsModal({ setIsSettingsModalOpen }) {
                   ? `${style.inputField} mx-5`
                   : `${style.inputField} mx-5 focus:border-[#1d9bf0]`
               }
-              placeholder="Name"
+              placeholder={currentUser.name}
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
               <button
                 type="submit"
                 disabled={!name}
-                onClick={(event) => postPost(event)}
+                onClick={(event) => {event.preventDefault(); setCurrentUserName(name)}}
                 className={`${style.submitGeneral} mx-5  ${
                   name ? style.activeSubmit : style.inactiveSubmit
                 }`}

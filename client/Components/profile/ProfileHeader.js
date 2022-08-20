@@ -24,7 +24,7 @@ function ProfileHeader() {
         </div>
       <div className={style.profileImageContainer}>
         <img
-          src={currentUser.profileImage}
+          src={currentUser.NFTs[currentUser.profileImage].image}
           alt="profile image"
           className={style.profileImage}
         />

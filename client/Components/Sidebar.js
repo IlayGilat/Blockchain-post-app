@@ -80,7 +80,7 @@ function Sidebar({ initialSelectedIcon = "Home" }) {
         <div className={style.profileButton} onClick={() => setIsSettingsModalOpen(true)}>
           <div className={style.profileLeft}>
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s"
+              src={currentUser.NFTs[currentUser.profileImage].image}
               alt="profile"
               className={style.profileImage}
             />

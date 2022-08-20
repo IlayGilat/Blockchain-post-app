@@ -1,7 +1,7 @@
-import React,{useState} from 'react'
+import React,{useContext, useState} from 'react'
 import PostBox from '../home/PostBox';
 import { BsArrowLeft } from "react-icons/bs";
-
+import { MyContext } from '../../Context/MyContext';
 
 const style = {
     wrapper: `h-[20rem] w-[35rem] text-white bg-[#171717] rounded-3xl p-10 flex flex-col`,
@@ -17,6 +17,7 @@ const style = {
   };
 function PostModal({setIsPostModalOpen}) {
     const [Message, setMessage] = useState("");
+    const {currentUser} = useContext(MyContext)
   return (
     <div className={style.wrapper}>
               <div className={style.backButton} onClick={() => setIsPostModalOpen(Boolean(false))}>
@@ -24,7 +25,7 @@ function PostModal({setIsPostModalOpen}) {
         </div>
     <div className={style.PostBoxLeft}>
     <img
-    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s"
+    src={currentUser.NFTs[currentUser.profileImage].image}
     alt="pfp"
     className={
       style.profileImage
