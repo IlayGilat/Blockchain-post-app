@@ -1,5 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { Alchemy, Network } from "alchemy-sdk";
+import { AlchemyConfig } from "alchemy-sdk";
+import { config } from "process";
 export const MyContext = createContext();
 
 export const MyProvider = ({ children }) => {
@@ -250,12 +253,26 @@ export const MyProvider = ({ children }) => {
     },
   ]);
 
+  const alchemy = new Alchemy(config)
+  const getNFTs= async () => {
+    console.log("SENT POST REQUEST FOR Alchemy")
+    try{
+    const nfts = await alchemy.nft.getNftsForOwner(accountAddress)
+    const NFTs = nfts["ownedNfts"]
+    let FormatedNFTs= [];
+    NFTs.map(NFT =>{
+      FormatedNFTs.push({text:NFT.title,image:NFT.media[0].gateway})
+    })
+    setUserNFTs(FormatedNFTs)
+    }catch(e){
+      console.error(e)
+    }
+  }
 
-  const router = useRouter()
+  const router = useRouter();
   useEffect(() => {
     checkIfWalletIsConnected();
   }, []);
-
 
   const checkIfWalletIsConnected = async () => {
     if (!window.ethereum) return setAppStatus("noMetaMask");
@@ -265,8 +282,9 @@ export const MyProvider = ({ children }) => {
       });
       if (addressArray.length > 0) {
         //connected
-        setAppStatus("connected");
         setAccountAddress(addressArray[0]);
+        await getNFTs()
+        setAppStatus("connected")
         //createUserAccount(addressArray[0]);
       } else {
         //not connected
@@ -278,15 +296,20 @@ export const MyProvider = ({ children }) => {
     }
   };
 
-
-
-
   const setCurrentUserName = (newName) => {
     setCurrentUser({
       ...currentUser,
       name: newName,
     });
   };
+
+  const setCurrentUserNFTPFP = (newNFT) => {
+    setCurrentUser({
+      ...currentUser,
+      profileImage: newNFT
+    })
+
+  }
 
   const connectToWallet = async () => {
     if (!window.ethereum) return setAppStatus("noMetaMask");
@@ -308,12 +331,6 @@ export const MyProvider = ({ children }) => {
     }
   };
 
-
-
-
-
-
-
   return (
     <MyContext.Provider
       value={{
@@ -326,7 +343,10 @@ export const MyProvider = ({ children }) => {
         setPosts,
         appStatus,
         setAppStatus,
-        connectToWallet
+        connectToWallet,
+        userNFTs,
+        setCurrentUserNFTPFP
+        
       }}
     >
       {children}

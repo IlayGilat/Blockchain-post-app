@@ -1,4 +1,5 @@
 import React,{useState,useContext} from 'react'
+import { MyContext } from '../../Context/MyContext';
 
 const style = {
     wrapper: `px-4 flex pb-4 w-2/3 mx-auto`,
@@ -14,11 +15,12 @@ const style = {
 
 function PostBox() {
     const [Message, setMessage] = useState("");
+    const {currentUser,userNFTs} = useContext(MyContext)
   return (
         <div className={style.wrapper}>
           <div className={style.PostBoxLeft}>
           <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s"
+          src={userNFTs[currentUser.profileImage].image}
           alt="pfp"
           className={
             style.profileImage
