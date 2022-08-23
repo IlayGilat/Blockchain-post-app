@@ -14,7 +14,7 @@ const style = {
   details: `px-3`,
 };
 function ProfileHeader() {
-  const {accountAddress,currentUser} = useContext(MyContext)
+  const {accountAddress,currentUser,userNFTs} = useContext(MyContext)
   const router = useRouter();
   return (
     <div className={style.wrapper}>
@@ -24,7 +24,7 @@ function ProfileHeader() {
         </div>
       <div className={style.profileImageContainer}>
         <img
-          src={currentUser.NFTs[currentUser.profileImage].image}
+          src={userNFTs[currentUser.profileImage].image}
           alt="profile image"
           className={style.profileImage}
         />

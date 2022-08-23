@@ -6,61 +6,8 @@ import { config } from "process";
 export const MyContext = createContext();
 
 export const MyProvider = ({ children }) => {
-  const [accountAddress, setAccountAddress] = useState(
-    "0xCBB6E40e415F913e1a6c4A8B50097cfD6B87E788"
-  );
-  const [userNFTs, setUserNFTs] = useState([
-    {
-      text: "Squod #21",
-      image:
-        "https://lh3.googleusercontent.com/Luialoa5_3h5vd8xT7t2gZ0XZEPHgVmBpLjU3CCD3oHkpTd3cNkwAlv4rLyflIgwC-SFWjxYn8hoRKmzS50TN0co8oZX8mkM6I3crw=w600",
-    },
-    {
-      text: "Fuckawaii #377",
-      image:
-        "https://lh3.googleusercontent.com/z6_q9nNuhnkFZKCVWbPaWFjwwduU_lmz2yd98_0vIzLAeFC8qWls42oqb096SWS38L0UOKh9MXjXS9Dr7NIkP_yvgcQr3U13e3VDUQ=w600",
-    },
-    {
-      text: "PsyBulls #101",
-      image:
-        "https://lh3.googleusercontent.com/eo470vZzfmJCl0PcmX5hoLp3xyiUb01GnMbObIUKqRjvNBLw9Gnu3FjvU64qRDaqczSX7j__3augpO32Y3mHioOPJ-ly8Xc7w-A1Nw=w600",
-    },
-    {
-      text: "Squod #21",
-      image:
-        "https://lh3.googleusercontent.com/Luialoa5_3h5vd8xT7t2gZ0XZEPHgVmBpLjU3CCD3oHkpTd3cNkwAlv4rLyflIgwC-SFWjxYn8hoRKmzS50TN0co8oZX8mkM6I3crw=w600",
-    },
-    {
-      text: "Squod #21",
-      image:
-        "https://lh3.googleusercontent.com/Luialoa5_3h5vd8xT7t2gZ0XZEPHgVmBpLjU3CCD3oHkpTd3cNkwAlv4rLyflIgwC-SFWjxYn8hoRKmzS50TN0co8oZX8mkM6I3crw=w600",
-    },
-    {
-      text: "Squod #21",
-      image:
-        "https://lh3.googleusercontent.com/Luialoa5_3h5vd8xT7t2gZ0XZEPHgVmBpLjU3CCD3oHkpTd3cNkwAlv4rLyflIgwC-SFWjxYn8hoRKmzS50TN0co8oZX8mkM6I3crw=w600",
-    },
-    {
-      text: "Squod #21",
-      image:
-        "https://lh3.googleusercontent.com/Luialoa5_3h5vd8xT7t2gZ0XZEPHgVmBpLjU3CCD3oHkpTd3cNkwAlv4rLyflIgwC-SFWjxYn8hoRKmzS50TN0co8oZX8mkM6I3crw=w600",
-    },
-    {
-      text: "Squod #21",
-      image:
-        "https://lh3.googleusercontent.com/Luialoa5_3h5vd8xT7t2gZ0XZEPHgVmBpLjU3CCD3oHkpTd3cNkwAlv4rLyflIgwC-SFWjxYn8hoRKmzS50TN0co8oZX8mkM6I3crw=w600",
-    },
-    {
-      text: "Squod #21",
-      image:
-        "https://lh3.googleusercontent.com/Luialoa5_3h5vd8xT7t2gZ0XZEPHgVmBpLjU3CCD3oHkpTd3cNkwAlv4rLyflIgwC-SFWjxYn8hoRKmzS50TN0co8oZX8mkM6I3crw=w600",
-    },
-    {
-      text: "Squod #21",
-      image:
-        "https://lh3.googleusercontent.com/Luialoa5_3h5vd8xT7t2gZ0XZEPHgVmBpLjU3CCD3oHkpTd3cNkwAlv4rLyflIgwC-SFWjxYn8hoRKmzS50TN0co8oZX8mkM6I3crw=w600",
-    },
-  ]);
+  const [accountAddress, setAccountAddress] = useState("");
+  const [userNFTs, setUserNFTs] = useState([]);
   const [currentUser, setCurrentUser] = useState({
     tweets: [
       {
@@ -154,9 +101,7 @@ export const MyProvider = ({ children }) => {
         timestamp: new Date(Date.now()).toISOString(),
       },
     ],
-    name: "Ilay Gilat",
-    NFTs: userNFTs,
-    walletAddress: "0xCBB6E40e415F913e1a6c4A8B50097cfD6B87E788",
+    name: "Unnamed",
     profileImage: 0,
   });
   const [appStatus, setAppStatus] = useState("loading");
@@ -253,26 +198,40 @@ export const MyProvider = ({ children }) => {
     },
   ]);
 
-  const alchemy = new Alchemy(config)
-  const getNFTs= async () => {
-    console.log("SENT POST REQUEST FOR Alchemy")
-    try{
-    const nfts = await alchemy.nft.getNftsForOwner(accountAddress)
-    const NFTs = nfts["ownedNfts"]
-    let FormatedNFTs= [];
-    NFTs.map(NFT =>{
-      FormatedNFTs.push({text:NFT.title,image:NFT.media[0].gateway})
-    })
-    setUserNFTs(FormatedNFTs)
-    }catch(e){
-      console.error(e)
+  const alchemy = new Alchemy(config);
+
+
+  
+  useEffect(() => {
+   checkIfWalletIsConnected()
+  },[]);
+
+  useEffect(() => {
+    getNFTs()
+  },[accountAddress])
+
+  
+
+  const getNFTs = async () => {
+    console.log("SENT POST REQUEST FOR Alchemy For Account " ,accountAddress);
+    try {
+      const nfts = await alchemy.nft.getNftsForOwner(accountAddress);
+      console.log("nfts: ",nfts)
+      const NFTs = nfts["ownedNfts"];
+      let FormatedNFTs = [];
+      NFTs.map((NFT) => {
+        FormatedNFTs.push({ text: NFT.title, image: NFT.media[0].gateway });
+      });
+      setUserNFTs(FormatedNFTs);
+      console.log(userNFTs)
+      setAppStatus("connected");       
+
+    } catch (e) {
+      console.error(e);
     }
-  }
+  };
 
   const router = useRouter();
-  useEffect(() => {
-    checkIfWalletIsConnected();
-  }, []);
 
   const checkIfWalletIsConnected = async () => {
     if (!window.ethereum) return setAppStatus("noMetaMask");
@@ -283,8 +242,6 @@ export const MyProvider = ({ children }) => {
       if (addressArray.length > 0) {
         //connected
         setAccountAddress(addressArray[0]);
-        await getNFTs()
-        setAppStatus("connected")
         //createUserAccount(addressArray[0]);
       } else {
         //not connected
@@ -306,10 +263,9 @@ export const MyProvider = ({ children }) => {
   const setCurrentUserNFTPFP = (newNFT) => {
     setCurrentUser({
       ...currentUser,
-      profileImage: newNFT
-    })
-
-  }
+      profileImage: newNFT,
+    });
+  };
 
   const connectToWallet = async () => {
     if (!window.ethereum) return setAppStatus("noMetaMask");
@@ -320,8 +276,8 @@ export const MyProvider = ({ children }) => {
       });
 
       if (addressArray.length > 0) {
-        setAppStatus("connected");
         setAccountAddress(addressArray[0]);
+        setAppStatus("connected");
       } else {
         router.push("/");
         setAppStatus("notConnected");
@@ -345,8 +301,7 @@ export const MyProvider = ({ children }) => {
         setAppStatus,
         connectToWallet,
         userNFTs,
-        setCurrentUserNFTPFP
-        
+        setCurrentUserNFTPFP,
       }}
     >
       {children}

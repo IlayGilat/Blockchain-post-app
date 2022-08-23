@@ -14,7 +14,7 @@ const style = {
 
 
 const ProfileBody = () => {
-const {accountAddress,currentUser} = useContext(MyContext)
+const {accountAddress,currentUser,userNFTs} = useContext(MyContext)
   return (
      <div className={style.wrapper}>
    <Tabs variant='soft-rounded' className='m-5'>
@@ -41,7 +41,7 @@ const {accountAddress,currentUser} = useContext(MyContext)
         <TabPanel >
           <div className={style.NftBody}>
           {
-            currentUser.NFTs.map((NFT,index) => (
+            userNFTs.map((NFT,index) => (
            <div className={style.NFT} key={index}>
              <NftImage Name={NFT.text} ImageUrl={NFT.image} boxSize="225"/>
            </div>   

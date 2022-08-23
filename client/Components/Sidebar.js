@@ -26,7 +26,7 @@ const style = {
   moreContainer: `flex items-center mr-2`,
 };
 function Sidebar({ initialSelectedIcon = "Home" }) {
-  const {accountAddress,currentUser} = useContext(MyContext)
+  const {accountAddress,currentUser,userNFTs} = useContext(MyContext)
   const router = useRouter();
   const [isPostModalOpen, setIsPostModalOpen] = useState(Boolean(false));
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(Boolean(false));
@@ -80,7 +80,7 @@ function Sidebar({ initialSelectedIcon = "Home" }) {
         <div className={style.profileButton} onClick={() => setIsSettingsModalOpen(true)}>
           <div className={style.profileLeft}>
             <img
-              src={currentUser.NFTs[currentUser.profileImage].image}
+              src={userNFTs[currentUser.profileImage].image}
               alt="profile"
               className={style.profileImage}
             />
@@ -101,6 +101,8 @@ function Sidebar({ initialSelectedIcon = "Home" }) {
       <Modal
         isOpen={Boolean(isPostModalOpen)}
         onRequestClose={() => setIsPostModalOpen(false)}
+        ariaHideApp={false}
+
         style={customStyles}
       >
         <PostModal setIsPostModalOpen={setIsPostModalOpen} />
@@ -108,6 +110,7 @@ function Sidebar({ initialSelectedIcon = "Home" }) {
       <Modal
         isOpen={Boolean(isSettingsModalOpen)}
         onRequestClose={() => setIsSettingsModalOpen(false)}
+        ariaHideApp={false}
         style={customStyles}
         
       >
