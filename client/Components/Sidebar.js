@@ -7,9 +7,10 @@ import PostModal from "../Components/Modals/PostModal";
 import { IoPersonOutline, IoPerson, IoMailSharp } from "react-icons/io5";
 import SidebarOption from "./SidebarOption";
 import { useRouter } from "next/router";
-import Modal from "react-modal";
+import Modal from 'react-modal'
 import SettingsModal from '../Components/Modals/SettingsModal'
 import { BsTwitter, BsFacebook, BsTelegram } from "react-icons/bs";
+
 const style = {
   wrapper: `flex-[1] flex px-8 flex-col `,
   Icon: ` p-3 text-2xl mx-auto flex cursor-pointer hover:bg-[#363636] rounded-[100px]`,
@@ -80,7 +81,7 @@ function Sidebar({ initialSelectedIcon = "Home" }) {
         <div className={style.profileButton} onClick={() => setIsSettingsModalOpen(true)}>
           <div className={style.profileLeft}>
             <img
-              src={userNFTs[currentUser.profileImage].image}
+              src={userNFTs.length != 0 ? userNFTs[currentUser.profileImage].image : 'https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg'}
               alt="profile"
               className={style.profileImage}
             />

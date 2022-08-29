@@ -20,7 +20,7 @@ function PostBox() {
         <div className={style.wrapper}>
           <div className={style.PostBoxLeft}>
           <img
-          src={userNFTs[currentUser.profileImage].image}
+          src={userNFTs.length != 0 ? userNFTs[currentUser.profileImage].image : 'https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg'}
           alt="pfp"
           className={
             style.profileImage

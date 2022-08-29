@@ -24,14 +24,14 @@ function ProfileHeader() {
         </div>
       <div className={style.profileImageContainer}>
         <img
-          src={userNFTs[currentUser.profileImage].image}
+          src={userNFTs.length != 0 ? userNFTs[currentUser.profileImage].image : 'https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg'}
           alt="profile image"
           className={style.profileImage}
         />
       </div>
       <div className={style.details}>
         <div>
-          <div className={style.primary}>Ilay Gilat &bull; {currentUser.tweets.length} Tweets</div>
+          <div className={style.primary}>{currentUser.name} &bull; {currentUser.tweets.length} Tweets</div>
           <div className={style.secondary}>
             {accountAddress && (
               <>

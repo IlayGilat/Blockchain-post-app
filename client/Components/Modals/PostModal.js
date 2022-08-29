@@ -17,7 +17,7 @@ const style = {
   };
 function PostModal({setIsPostModalOpen}) {
     const [Message, setMessage] = useState("");
-    const {currentUser} = useContext(MyContext)
+    const {currentUser,userNFTs} = useContext(MyContext)
   return (
     <div className={style.wrapper}>
               <div className={style.backButton} onClick={() => setIsPostModalOpen(Boolean(false))}>
@@ -25,7 +25,7 @@ function PostModal({setIsPostModalOpen}) {
         </div>
     <div className={style.PostBoxLeft}>
     <img
-    src={currentUser.NFTs[currentUser.profileImage].image}
+    src={userNFTs.length != 0 ? userNFTs[currentUser.profileImage].image : 'https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg'}
     alt="pfp"
     className={
       style.profileImage

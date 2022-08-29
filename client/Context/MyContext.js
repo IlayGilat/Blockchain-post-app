@@ -223,7 +223,7 @@ export const MyProvider = ({ children }) => {
         FormatedNFTs.push({ text: NFT.title, image: NFT.media[0].gateway });
       });
       setUserNFTs(FormatedNFTs);
-      console.log(userNFTs)
+      console.log("user NFTs: " , userNFTs)
       setAppStatus("connected");       
 
     } catch (e) {
