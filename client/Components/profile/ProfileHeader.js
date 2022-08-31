@@ -13,8 +13,8 @@ const style = {
   profileImageNft: `object-cover h-full`,
   details: `px-3`,
 };
-function ProfileHeader() {
-  const {accountAddress,currentUser,userNFTs} = useContext(MyContext)
+function ProfileHeader({address}) {
+  const {currentUser,userNFTs} = useContext(MyContext)
   const router = useRouter();
   return (
     <div className={style.wrapper}>
@@ -33,9 +33,9 @@ function ProfileHeader() {
         <div>
           <div className={style.primary}>{currentUser.name} &bull; {currentUser.tweets.length} Tweets</div>
           <div className={style.secondary}>
-            {accountAddress && (
+            {address && (
               <>
-                @{accountAddress.slice(0, 8)}...{accountAddress.slice(-4)}
+                @{address.slice(0, 8)}...{address.slice(-4)}
               </>
             )}
           </div>

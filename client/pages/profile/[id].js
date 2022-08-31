@@ -1,8 +1,8 @@
-import React from "react";
-import ProfileHeader from "../Components/profile/ProfileHeader";
-import Sidebar from "../Components/Sidebar";
-import ProfileBody from "../Components/profile/ProfileBody";
-
+import React, { useEffect } from "react";
+import ProfileHeader from "../../Components/profile/ProfileHeader";
+import Sidebar from "../../Components/Sidebar";
+import ProfileBody from "../../Components/profile/ProfileBody";
+import { useRouter } from "next/router";
 const style = {
   wrapper: `flex justify-center flex-row h-screen w-screen select-none bg-[#171717] text-white`,
   content: ` w-2/3 flex flex-auto`,
@@ -10,6 +10,14 @@ const style = {
 };
 
 function profile() {
+  const router = useRouter()
+  const {id} = router.query
+  
+  useEffect(()=>{
+    if(!id) return;
+  },[id])
+
+  console.log("id is " + id)
   return (
     <div className={style.wrapper}>
       <div className={style.content}>
@@ -17,8 +25,8 @@ function profile() {
           <Sidebar initialSelectedIcon="Profile" />
         </div>
         <div className={style.mainContent}>
-          <ProfileHeader />
-            <ProfileBody />
+          <ProfileHeader address={id}/>
+            <ProfileBody address={id}/>
           </div>
         </div>
     </div>

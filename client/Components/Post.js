@@ -13,7 +13,7 @@ const style = {
   image: `rounded-3xl`,
   footer: `flex justify-between mr-28 mt-4 text-[#8899a6]`,
   footerIcon: `rounded-full text-lg p-2`,
-  postImage: ``
+  postImage: `w-1/2 m-auto outline outline-offset-4 outline-1 outline-[#38444d]`
 };
 const Post = ({ displayName, userName, text, avatar, timestamp, postImage }) => {
   return (
@@ -31,7 +31,7 @@ const Post = ({ displayName, userName, text, avatar, timestamp, postImage }) => 
           </span>
           <div className={style.tweet}>{text}</div>
           {
-            true ? (
+            postImage ? (
               <div>
               <img src={postImage} alt={userName} className={style.postImage}/>
               </div>

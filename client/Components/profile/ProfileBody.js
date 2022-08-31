@@ -13,8 +13,8 @@ const style = {
 
 
 
-const ProfileBody = () => {
-const {accountAddress,currentUser,userNFTs} = useContext(MyContext)
+const ProfileBody = ({address}) => {
+const {currentUser,userNFTs} = useContext(MyContext)
   return (
      <div className={style.wrapper}>
    <Tabs variant='soft-rounded' className='m-5'>
@@ -30,7 +30,7 @@ const {accountAddress,currentUser,userNFTs} = useContext(MyContext)
           <Post 
           key={index}
           displayName="Ilay Gilat"
-          userName={`${accountAddress.slice(0,4)}...${accountAddress.slice(-4)}`}
+          userName={`${address.slice(0,4)}...${address.slice(-4)}`}
           text={tweet.text}
           avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s"
           timestamp={tweet.timestamp}

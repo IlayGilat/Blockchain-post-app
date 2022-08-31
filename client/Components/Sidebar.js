@@ -68,7 +68,7 @@ function Sidebar({ initialSelectedIcon = "Home" }) {
           Icon={initialSelectedIcon === "Profile" ? IoPerson : IoPersonOutline}
           text="Profile"
           isActive={Boolean(initialSelectedIcon === "Profile")}
-          redirect={"/profile"}
+          redirect={`/profile/id=${accountAddress}`}
         />
         <div className={style.WriteButton} onClick={() => setIsPostModalOpen(true)}>
           <div className="mr-4">
