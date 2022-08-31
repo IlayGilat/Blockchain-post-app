@@ -17,8 +17,9 @@ export const MyProvider = ({ children }) => {
           profileImage:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s",
         },
-        text: "this is my tweet",
+        text: "this is my tweet with photo",
         timestamp: new Date(Date.now()).toISOString(),
+        image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s",
       },
       {
         author: {
@@ -115,6 +116,7 @@ export const MyProvider = ({ children }) => {
       },
       text: "this is my tweet",
       timestamp: new Date(Date.now()).toISOString(),
+      image:"https://i.pinimg.com/originals/cb/f7/83/cbf783e5b7eb3220ad6855fd62c77e65.png",
     },
     {
       author: {
@@ -125,6 +127,8 @@ export const MyProvider = ({ children }) => {
       },
       text: "this is my tweet",
       timestamp: new Date(Date.now()).toISOString(),
+      image:"https://iso.500px.com/wp-content/uploads/2014/07/big-one.jpg",
+
     },
     {
       author: {
@@ -199,7 +203,6 @@ export const MyProvider = ({ children }) => {
   ]);
 
   const alchemy = new Alchemy(config);
-
 
   
   useEffect(() => {

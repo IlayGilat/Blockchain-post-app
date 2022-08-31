@@ -1,21 +1,56 @@
 import React,{useState,useContext} from 'react'
 import { MyContext } from '../../Context/MyContext';
-
+import { BsCardImage  } from 'react-icons/bs'
+import {useFilePicker} from "use-file-picker"
 const style = {
     wrapper: `px-4 flex pb-4 w-2/3 mx-auto`,
     PostBoxLeft: `mr-4 `,
     PostBoxRight: `flex-1`,
     profileImage: `w-10 rounded-full`,
-    inputField: `w-full h-full outline-none bg-transparent text-lg placeholder:italic placeholder:text-slate-400 border-[#171717] border focus:border focus:border-[#1d9bf0] resize-none py-2 pl-9 pr-3 `,
+    inputField: `w-full h-full outline-none bg-transparent text-lg placeholder:italic placeholder:text-slate-400 resize-none py-2 pl-9 pr-3 `,
     formLowerContainer: `flex`,
     submitGeneral: `px-8 py-2 rounded-3xl font-bold flex m-auto mt-1 `,
     inactiveSubmit: `bg-[#196195] text-[#95999e]`,
+    icon: `mr-2 cursor-pointer`,
+    iconsContainer: `text-[#1d9bf0] flex flex-1 items-center`,
     activeSubmit: `bg-[#1d9bf0] text-white`,
   };
 
 function PostBox() {
     const [Message, setMessage] = useState("");
-    const {currentUser,userNFTs} = useContext(MyContext)
+    const [Image,setImage] = useState();
+    const [openFileSelector, { filesContent, loading }] = useFilePicker({
+      readAs: 'DataURL',
+      accept: 'image/*',
+      multiple: false,
+      limitFilesConfig: { max: 1 },
+      // minFileSize: 0.1, // in megabytes
+      maxFileSize: 50,
+    });
+    const {currentUser,userNFTs,accountAddress} = useContext(MyContext)
+
+
+
+    const postPost = async (event)  => {
+      event.preventDefault()
+
+      if(!Message) return;
+      const postId = `${accountAddress}_${Date.now()}`
+
+
+      const PostDoc = {
+        _type: 'post',
+        _id: postId,
+        message: Message,
+        timestamp: new Date(Date.now()).toISOString(),
+        image: filesContent[0].content,
+        author:{
+          _key: postId,
+          _ref: accountAddress,
+          _type: 'reference',
+        },
+      }
+    }
   return (
         <div className={style.wrapper}>
           <div className={style.PostBoxLeft}>
@@ -29,13 +64,24 @@ function PostBox() {
           </div>
           <div className={style.PostBoxRight}>
             <form>
+              <div className={`${Message || filesContent.length > 0 ? `border border-[#1d9bf0] ` : ``} ${filesContent.length > 0 ? `p-4`:``}`}>
               <textarea
-                className={Message ? style.inputField : `${style.inputField} focus:border-[#196195] `}
+                className={Message ? style.inputField : `${style.inputField}  `}
                 placeholder="Speak your mind"
                 value={Message}
-                onChange={(e) => setMessage(e.target.value)}
-              />
+                onChange={(e) => 
+                  {setMessage(e.target.value);}}
+                />
+                {
+                    filesContent.length > 0 ?
+                    <img src={filesContent[0].content} alt={filesContent[0].name}/>
+                  : <></>
+                }
+                </div>
               <div className={style.formLowerContainer}>
+              <div className={style.iconsContainer}>
+              <BsCardImage className={style.icon} onClick={() => openFileSelector()}/>
+                </div>
                 <button
                   type="submit"
                   disabled={!Message}

@@ -36,6 +36,7 @@ function Feed() {
             text={tweet.text}
             avatar={tweet.author.profileImage}
             timestamp={tweet.timestamp}
+            postImage={tweet.image}
           />
         ))}
       </div>
