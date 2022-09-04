@@ -2,7 +2,8 @@ import React, { useState, useContext } from "react";
 import { MyContext } from "../../Context/MyContext";
 import { BsCardImage } from "react-icons/bs";
 import { useFilePicker } from "use-file-picker";
-import {MdClear} from 'react-icons/md'
+import { MdClear } from "react-icons/md";
+import { client } from "../../lib/client";
 const style = {
   wrapper: `px-4 flex pb-4 w-2/3 mx-auto`,
   PostBoxLeft: `mr-4 `,
@@ -37,17 +38,31 @@ function PostBox() {
     const postId = `${accountAddress}_${Date.now()}`;
 
     const PostDoc = {
-      _type: "post",
+      _type: "posts",
       _id: postId,
-      message: Message,
+      postText: Message,
       timestamp: new Date(Date.now()).toISOString(),
-      image: filesContent[0].content,
+      image: filesContent[0]?.content,
       author: {
         _key: postId,
         _ref: accountAddress,
         _type: "reference",
       },
     };
+    await client.createIfNotExists(PostDoc);
+    await client
+      .patch(accountAddress)
+      .setIfMissing({ posts: [] })
+      .insert("after", "posts[-1]", [
+        {
+          _key: postId,
+          _type: "reference",
+          _ref: postId,
+        },
+      ])
+      .commit();
+      clear()
+      setMessage('')
   };
   return (
     <div className={style.wrapper}>
@@ -81,13 +96,16 @@ function PostBox() {
             />
             {filesContent.length > 0 ? (
               <div className="w-1/2 ">
-              <MdClear className={`${style.icon} relative left-1  top-6 bg-[#363636] w-[20px] h-[20px] rounded-[100px]`} onClick={()=>clear()}/>
-              <img
-                src={filesContent[0].content}
-                alt={filesContent[0].name}
-                className={style.postImage}
+                <MdClear
+                  className={`${style.icon} relative left-1  top-6 bg-[#363636] w-[20px] h-[20px] rounded-[100px]`}
+                  onClick={() => clear()}
                 />
-                </div>
+                <img
+                  src={filesContent[0].content}
+                  alt={filesContent[0].name}
+                  className={style.postImage}
+                />
+              </div>
             ) : (
               <></>
             )}

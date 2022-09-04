@@ -3,239 +3,116 @@ import { useRouter } from "next/router";
 import { Alchemy, Network } from "alchemy-sdk";
 import { AlchemyConfig } from "alchemy-sdk";
 import { config } from "process";
+import { client } from "../lib/client";
 export const MyContext = createContext();
 
 export const MyProvider = ({ children }) => {
   const [accountAddress, setAccountAddress] = useState("");
   const [userNFTs, setUserNFTs] = useState([]);
-  const [currentUser, setCurrentUser] = useState({
-    tweets: [
-      {
-        author: {
-          name: "ilay",
-          walletAddress: "0xCBB6E40e415F913e1a6c4A8B50097cfD6B87E788",
-          profileImage:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s",
-        },
-        text: "this is my tweet with photo",
-        timestamp: new Date(Date.now()).toISOString(),
-        image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s",
-      },
-      {
-        author: {
-          name: "ilay",
-          walletAddress: "0xCBB6E40e415F913e1a6c4A8B50097cfD6B87E788",
-          profileImage:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s",
-        },
-        text: "this is my tweet",
-        timestamp: new Date(Date.now()).toISOString(),
-      },
-      {
-        author: {
-          name: "ilay",
-          walletAddress: "0xCBB6E40e415F913e1a6c4A8B50097cfD6B87E788",
-          profileImage:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s",
-        },
-        text: "this is my tweet",
-        timestamp: new Date(Date.now()).toISOString(),
-      },
-      {
-        author: {
-          name: "ilay",
-          walletAddress: "0xCBB6E40e415F913e1a6c4A8B50097cfD6B87E788",
-          profileImage:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s",
-        },
-        text: "this is my tweet",
-        timestamp: new Date(Date.now()).toISOString(),
-      },
-      {
-        author: {
-          name: "ilay",
-          walletAddress: "0xCBB6E40e415F913e1a6c4A8B50097cfD6B87E788",
-          profileImage:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s",
-        },
-        text: "this is my tweet",
-        timestamp: new Date(Date.now()).toISOString(),
-      },
-      {
-        author: {
-          name: "ilay",
-          walletAddress: "0xCBB6E40e415F913e1a6c4A8B50097cfD6B87E788",
-          profileImage:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s",
-        },
-        text: "this is my tweet",
-        timestamp: new Date(Date.now()).toISOString(),
-      },
-      {
-        author: {
-          name: "ilay",
-          walletAddress: "0xCBB6E40e415F913e1a6c4A8B50097cfD6B87E788",
-          profileImage:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s",
-        },
-        text: "this is my tweet",
-        timestamp: new Date(Date.now()).toISOString(),
-      },
-      {
-        author: {
-          name: "ilay",
-          walletAddress: "0xCBB6E40e415F913e1a6c4A8B50097cfD6B87E788",
-          profileImage:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s",
-        },
-        text: "this is my tweet",
-        timestamp: new Date(Date.now()).toISOString(),
-      },
-      {
-        author: {
-          name: "ilay",
-          walletAddress: "0xCBB6E40e415F913e1a6c4A8B50097cfD6B87E788",
-          profileImage:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s",
-        },
-        text: "this is my tweet",
-        timestamp: new Date(Date.now()).toISOString(),
-      },
-    ],
-    name: "Unnamed",
-    profileImage: 0,
-  });
+  const [currentUser, setCurrentUser] = useState({});
   const [appStatus, setAppStatus] = useState("loading");
-  const [posts, setPosts] = useState([
-    {
-      author: {
-        name: "ilay",
-        walletAddress: "0xCBB6E40e415F913e1a6c4A8B50097cfD6B87E788",
-        profileImage:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s",
-      },
-      text: "this is my tweet",
-      timestamp: new Date(Date.now()).toISOString(),
-      image:"https://i.pinimg.com/originals/cb/f7/83/cbf783e5b7eb3220ad6855fd62c77e65.png",
-    },
-    {
-      author: {
-        name: "ilay",
-        walletAddress: "0xCBB6E40e415F913e1a6c4A8B50097cfD6B87E788",
-        profileImage:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s",
-      },
-      text: "this is my tweet",
-      timestamp: new Date(Date.now()).toISOString(),
-      image:"https://iso.500px.com/wp-content/uploads/2014/07/big-one.jpg",
+  const [posts, setPosts] = useState([]);
 
-    },
-    {
-      author: {
-        name: "ilay",
-        walletAddress: "0xCBB6E40e415F913e1a6c4A8B50097cfD6B87E788",
-        profileImage:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s",
-      },
-      text: "this is my tweet",
-      timestamp: new Date(Date.now()).toISOString(),
-    },
-    {
-      author: {
-        name: "ilay",
-        walletAddress: "0xCBB6E40e415F913e1a6c4A8B50097cfD6B87E788",
-        profileImage:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s",
-      },
-      text: "this is my tweet",
-      timestamp: new Date(Date.now()).toISOString(),
-    },
-    {
-      author: {
-        name: "ilay",
-        walletAddress: "0xCBB6E40e415F913e1a6c4A8B50097cfD6B87E788",
-        profileImage:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s",
-      },
-      text: "this is my tweet",
-      timestamp: new Date(Date.now()).toISOString(),
-    },
-    {
-      author: {
-        name: "ilay",
-        walletAddress: "0xCBB6E40e415F913e1a6c4A8B50097cfD6B87E788",
-        profileImage:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s",
-      },
-      text: "this is my tweet",
-      timestamp: new Date(Date.now()).toISOString(),
-    },
-    {
-      author: {
-        name: "ilay",
-        walletAddress: "0xCBB6E40e415F913e1a6c4A8B50097cfD6B87E788",
-        profileImage:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s",
-      },
-      text: "this is my tweet",
-      timestamp: new Date(Date.now()).toISOString(),
-    },
-    {
-      author: {
-        name: "ilay",
-        walletAddress: "0xCBB6E40e415F913e1a6c4A8B50097cfD6B87E788",
-        profileImage:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s",
-      },
-      text: "this is my tweet",
-      timestamp: new Date(Date.now()).toISOString(),
-    },
-    {
-      author: {
-        name: "ilay",
-        walletAddress: "0xCBB6E40e415F913e1a6c4A8B50097cfD6B87E788",
-        profileImage:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s",
-      },
-      text: "this is my tweet",
-      timestamp: new Date(Date.now()).toISOString(),
-    },
-  ]);
-
+  const [ranNFTs, setRanNFTs] = useState(false);
+  const [ranCreateUser,setRanCreateUser] = useState(false);
+  const [ranFetchPost,setRanFetchPost] = useState(false)
+  const [ranFetchUser,setRanFetchUser] = useState(false)
+  const router = useRouter();
   const alchemy = new Alchemy(config);
 
-  
   useEffect(() => {
-   checkIfWalletIsConnected()
-  },[]);
+    checkIfWalletIsConnected();
+  }, []);
 
   useEffect(() => {
-    getNFTs()
-  },[accountAddress])
+    if (!accountAddress) return;
+    getNFTs();
+  }, [accountAddress]);
 
-  
+  useEffect(() => {
+    if (!ranNFTs) return;
+    createUserAccount();
+  }, [ranNFTs]);
+
+  useEffect(() => {
+    if(!ranCreateUser) return;
+    getUserDetails();
+  }, [ranCreateUser]);
+
+  useEffect(() => {
+    if(!ranFetchUser) return;
+    fetchPosts();
+  }, [ranFetchUser]);
+
+  useEffect(() => {
+    if(!ranFetchPost) return
+    setAppStatus("connected")
+  },[ranFetchPost])
+
 
   const getNFTs = async () => {
-    console.log("SENT POST REQUEST FOR Alchemy For Account " ,accountAddress);
     try {
       const nfts = await alchemy.nft.getNftsForOwner(accountAddress);
-      console.log("nfts: ",nfts)
       const NFTs = nfts["ownedNfts"];
       let FormatedNFTs = [];
       NFTs.map((NFT) => {
         FormatedNFTs.push({ text: NFT.title, image: NFT.media[0].gateway });
       });
       setUserNFTs(FormatedNFTs);
-      console.log("user NFTs: " , userNFTs)
-      setAppStatus("connected");       
-
+      setRanNFTs(true);
     } catch (e) {
       console.error(e);
     }
   };
 
-  const router = useRouter();
+  const fetchPosts = async () => {
+    const query = `
+    *[_type == "posts"]{
+      "author": author->{name,walletAddress,profileImage,nfts},
+      postText,
+      image,
+      timestamp
+    } | order(timestamp desc)
+    `;
 
+    const sanityResponse = await client.fetch(query);
+
+    setPosts([]);
+
+    sanityResponse.forEach(async (item) => {
+      const newItem = {
+        text: item.postText,
+        timestamp: item.timestamp,
+        image: item.image,
+        author: {
+          name: item.author.name,
+          walletAddress: item.author.walletAddress,
+          profileImage: item.author.nfts[item.author.profileImage].image,
+        },
+      };
+      setPosts((prevState) => [...prevState, newItem]);
+    });
+    setRanFetchPost(true)
+  };
+
+  const getUserDetails = async (userAccount = accountAddress) => {
+    const query = `
+    *[_type == "users" && _id == "${userAccount}"]{
+      "posts": posts[]->{timestamp, postText,image}| order(timestamp desc),
+      name,
+      profileImage,
+      nfts,
+      walletAddress
+    }
+    `;
+    const sanityResponse = await client.fetch(query);
+    setCurrentUser({
+      posts: sanityResponse[0].posts,
+      name: sanityResponse[0].name,
+      profileImage: sanityResponse[0].profileImage,
+    });
+    setRanFetchUser(true)
+  };
   const checkIfWalletIsConnected = async () => {
     if (!window.ethereum) return setAppStatus("noMetaMask");
     try {
@@ -245,7 +122,6 @@ export const MyProvider = ({ children }) => {
       if (addressArray.length > 0) {
         //connected
         setAccountAddress(addressArray[0]);
-        //createUserAccount(addressArray[0]);
       } else {
         //not connected
         router.push("/");
@@ -256,6 +132,25 @@ export const MyProvider = ({ children }) => {
     }
   };
 
+  const createUserAccount = async (userWalletAddress = accountAddress) => {
+    if (!window.ethereum) return setAppStatus("noMetaMask");
+    try {
+      const userDoc = {
+        _type: "users",
+        _id: accountAddress,
+        name: "Unnamed",
+        profileImage: 0,
+        nfts: userNFTs,
+        walletAddress: accountAddress,
+      };
+      await client.createIfNotExists(userDoc);
+      setRanCreateUser(true)
+    } catch (error) {
+      console.error(error);
+      router.push("/");
+      setAppStatus("error");
+    }
+  };
   const setCurrentUserName = (newName) => {
     setCurrentUser({
       ...currentUser,
@@ -280,7 +175,6 @@ export const MyProvider = ({ children }) => {
 
       if (addressArray.length > 0) {
         setAccountAddress(addressArray[0]);
-        setAppStatus("connected");
       } else {
         router.push("/");
         setAppStatus("notConnected");
@@ -305,6 +199,7 @@ export const MyProvider = ({ children }) => {
         connectToWallet,
         userNFTs,
         setCurrentUserNFTPFP,
+        fetchPosts,
       }}
     >
       {children}

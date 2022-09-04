@@ -14,7 +14,8 @@ const style = {
   details: `px-3`,
 };
 function ProfileHeader({address}) {
-  const {currentUser,userNFTs} = useContext(MyContext)
+  const {currentUser,userNFTs,accountAddress} = useContext(MyContext)
+  console.log(currentUser)
   const router = useRouter();
   return (
     <div className={style.wrapper}>
@@ -31,11 +32,11 @@ function ProfileHeader({address}) {
       </div>
       <div className={style.details}>
         <div>
-          <div className={style.primary}>{currentUser.name} &bull; {currentUser.tweets.length} Tweets</div>
+          <div className={style.primary}>{currentUser.name} &bull; {currentUser.posts.length} Posts</div>
           <div className={style.secondary}>
             {address && (
               <>
-                @{address.slice(0, 8)}...{address.slice(-4)}
+                @{accountAddress.slice(0, 8)}...{accountAddress.slice(-4)}
               </>
             )}
           </div>

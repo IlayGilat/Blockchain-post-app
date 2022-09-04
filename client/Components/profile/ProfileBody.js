@@ -14,7 +14,7 @@ const style = {
 
 
 const ProfileBody = ({address}) => {
-const {currentUser,userNFTs} = useContext(MyContext)
+const {currentUser,userNFTs,accountAddress} = useContext(MyContext)
   return (
      <div className={style.wrapper}>
    <Tabs variant='soft-rounded' className='m-5'>
@@ -26,14 +26,14 @@ const {currentUser,userNFTs} = useContext(MyContext)
     <TabPanel>
     
       {
-        currentUser.tweets.map((tweet,index) => (
+        currentUser.posts.map((post,index) => (
           <Post 
           key={index}
-          displayName="Ilay Gilat"
-          userName={`${address.slice(0,4)}...${address.slice(-4)}`}
-          text={tweet.text}
-          avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS44McpW8bW_YVspIfH-Bh967ooD-PqaMC_oknoiFjdbg&s"
-          timestamp={tweet.timestamp}
+          displayName={currentUser.name}
+          userName={`${accountAddress.slice(0,4)}...${accountAddress.slice(-4)}`}
+          text={post.postText}
+          avatar={ userNFTs[currentUser.profileImage].image}
+          timestamp={post.timestamp}
           />
           ))
         }

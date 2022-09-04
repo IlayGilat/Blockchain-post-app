@@ -26,7 +26,7 @@ function PostModal({ setIsPostModalOpen }) {
     const postId = `${accountAddress}_${Date.now()}`;
 
     const PostDoc = {
-      _type: "post",
+      _type: "posts",
       _id: postId,
       message: Message,
       timestamp: new Date(Date.now()).toISOString(),
