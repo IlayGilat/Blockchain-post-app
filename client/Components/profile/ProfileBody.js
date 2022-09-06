@@ -13,9 +13,9 @@ const style = {
 
 
 
-const ProfileBody = ({address}) => {
-const {currentUser,userNFTs,accountAddress} = useContext(MyContext)
-  return (
+const ProfileBody = ({address,user}) => {
+const {currentUser,userNFTs,accountAddress,getUserDetails} = useContext(MyContext)
+return (
      <div className={style.wrapper}>
    <Tabs variant='soft-rounded' className='m-5'>
     <TabList>
@@ -26,22 +26,24 @@ const {currentUser,userNFTs,accountAddress} = useContext(MyContext)
     <TabPanel>
     
       {
-        currentUser.posts.map((post,index) => (
+       user.posts.map((post,index) => (
           <Post 
           key={index}
-          displayName={currentUser.name}
+          displayName={user.name}
           userName={`${accountAddress.slice(0,4)}...${accountAddress.slice(-4)}`}
           text={post.postText}
-          avatar={ userNFTs[currentUser.profileImage].image}
+          avatar={ user.nfts[user.profileImage].image}
           timestamp={post.timestamp}
+          postImage={post.image}
           />
           ))
+          
         }
         </TabPanel>
         <TabPanel >
           <div className={style.NftBody}>
           {
-            userNFTs.map((NFT,index) => (
+            user.nfts.map((NFT,index) => (
            <div className={style.NFT} key={index}>
              <NftImage Name={NFT.text} ImageUrl={NFT.image} boxSize="225"/>
            </div>   

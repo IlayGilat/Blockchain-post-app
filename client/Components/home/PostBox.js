@@ -29,7 +29,7 @@ function PostBox() {
     // minFileSize: 0.1, // in megabytes
     maxFileSize: 50,
   });
-  const { currentUser, userNFTs, accountAddress } = useContext(MyContext);
+  const { currentUser, userNFTs, accountAddress, fetchPosts} = useContext(MyContext);
 
   const postPost = async (event) => {
     event.preventDefault();
@@ -63,6 +63,7 @@ function PostBox() {
       .commit();
       clear()
       setMessage('')
+    fetchPosts()
   };
   return (
     <div className={style.wrapper}>

@@ -95,23 +95,50 @@ export const MyProvider = ({ children }) => {
     setRanFetchPost(true)
   };
 
+  const fetchUsers= async ()=>{
+    const query= `*[_type == "users" ]{
+      name,
+        walletAddress,
+        nfts,
+        profileImage,
+          }`
+
+          return await client.fetch(query)
+  }
   const getUserDetails = async (userAccount = accountAddress) => {
     const query = `
     *[_type == "users" && _id == "${userAccount}"]{
-      "posts": posts[]->{timestamp, postText,image}| order(timestamp desc),
+      "posts": posts[]->{timestamp, postText,image}|order(timestamp desc),
       name,
       profileImage,
       nfts,
       walletAddress
     }
     `;
-    const sanityResponse = await client.fetch(query);
+    const sanityResponse = await client.fetch(query)
+
+    const postQuery = `
+    *[_type == "posts" && author._ref == "${userAccount}" ]{
+      postText,
+        author,
+        image,
+        timestamp,
+          }
+    `
+    const postSanityResponse = await client.fetch(postQuery)
     setCurrentUser({
-      posts: sanityResponse[0].posts,
+      posts: postSanityResponse,
       name: sanityResponse[0].name,
       profileImage: sanityResponse[0].profileImage,
     });
     setRanFetchUser(true)
+    return {
+      posts: postSanityResponse,
+      name: sanityResponse[0].name,
+      profileImage: sanityResponse[0].profileImage,
+      nfts: sanityResponse[0].nfts,
+      walletAddress: sanityResponse[0].walletAddress,
+    }
   };
   const checkIfWalletIsConnected = async () => {
     if (!window.ethereum) return setAppStatus("noMetaMask");
@@ -143,6 +170,7 @@ export const MyProvider = ({ children }) => {
         nfts: userNFTs,
         walletAddress: accountAddress,
       };
+      
       await client.createIfNotExists(userDoc);
       setRanCreateUser(true)
     } catch (error) {
@@ -151,18 +179,39 @@ export const MyProvider = ({ children }) => {
       setAppStatus("error");
     }
   };
-  const setCurrentUserName = (newName) => {
+  const setCurrentUserName = async (newName) => {
     setCurrentUser({
       ...currentUser,
       name: newName,
     });
+
+    const mutations = {
+      _type: "users",
+      _id: accountAddress,
+      name: newName,
+      profileImage: 0,
+      nfts: userNFTs,
+      walletAddress: accountAddress,
+    }
+
+    await client.createOrReplace(mutations);
   };
 
-  const setCurrentUserNFTPFP = (newNFT) => {
+  const setCurrentUserNFTPFP = async (newNFT) => {
     setCurrentUser({
       ...currentUser,
       profileImage: newNFT,
     });
+    const mutations = {
+      _type: "users",
+      _id: accountAddress,
+      name: currentUser.name,
+      profileImage: newNFT,
+      nfts: userNFTs,
+      walletAddress: accountAddress,
+    }
+
+    await client.createOrReplace(mutations);
   };
 
   const connectToWallet = async () => {
@@ -200,6 +249,8 @@ export const MyProvider = ({ children }) => {
         userNFTs,
         setCurrentUserNFTPFP,
         fetchPosts,
+        getUserDetails,
+        fetchUsers,
       }}
     >
       {children}

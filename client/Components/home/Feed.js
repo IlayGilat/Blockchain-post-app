@@ -18,25 +18,26 @@ function Feed() {
         <PostBox />
       </div>
       <div className="mx-auto">
-        {posts.map((tweet, index) => (
+        {posts.map((post, index) => (
           <Post
             key={index}
             displayName={
-              tweet.author.name === "Unnamed"
-                ? `${tweet.author.walletAddress.slice(
+              post.author.name === "Unnamed"
+                ? `${post.author.walletAddress.slice(
                     0,
                     4
-                  )}...${tweet.author.walletAddress.slice(41)}`
-                : tweet.author.name
+                  )}...${post.author.walletAddress.slice(41)}`
+                : post.author.name
             }
-            userName={`${tweet.author.walletAddress.slice(
+            userName={`${post.author.walletAddress.slice(
               0,
               4
-            )}...${tweet.author.walletAddress.slice(41)}`}
-            text={tweet.text}
-            avatar={tweet.author.profileImage}
-            timestamp={tweet.timestamp}
-            postImage={tweet.image}
+            )}...${post.author.walletAddress.slice(41)}`}
+            text={post.text}
+            re={`/profile/id=${post.author.walletAddress}`}
+            avatar={post.author.profileImage}
+            timestamp={post.timestamp}
+            postImage={post.image}
           />
         ))}
       </div>

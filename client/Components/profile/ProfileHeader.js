@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import {MyContext} from '../../Context/MyContext'
@@ -13,10 +14,11 @@ const style = {
   profileImageNft: `object-cover h-full`,
   details: `px-3`,
 };
-function ProfileHeader({address}) {
-  const {currentUser,userNFTs,accountAddress} = useContext(MyContext)
-  console.log(currentUser)
+function ProfileHeader({address,user}) {
+  const {currentUser,userNFTs,accountAddress , getUserDetails} = useContext(MyContext)
   const router = useRouter();
+
+  console.log("searcedUser = " , user)
   return (
     <div className={style.wrapper}>
       <div className={style.header}>
@@ -25,18 +27,18 @@ function ProfileHeader({address}) {
         </div>
       <div className={style.profileImageContainer}>
         <img
-          src={userNFTs.length != 0 ? userNFTs[currentUser.profileImage].image : 'https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg'}
+         src={userNFTs.length != 0 ? user.nfts[user.profileImage].image : 'https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg'}
           alt="profile image"
           className={style.profileImage}
         />
       </div>
       <div className={style.details}>
         <div>
-          <div className={style.primary}>{currentUser.name} &bull; {currentUser.posts.length} Posts</div>
+          <div className={style.primary}>{user.name} &bull; {Object.keys( user.posts).length} Posts</div>
           <div className={style.secondary}>
             {address && (
               <>
-                @{accountAddress.slice(0, 8)}...{accountAddress.slice(-4)}
+                @{user.walletAddress.slice(0, 8)}...{user.walletAddress.slice(-4)}
               </>
             )}
           </div>

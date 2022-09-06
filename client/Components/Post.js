@@ -1,6 +1,7 @@
 import React from "react";
 import { format } from "timeago.js";
 import Image from "next/image";
+import { useRouter } from "next/router";
 const style = {
   wrapper: `flex p-3 border w-2/3 m-auto mt-10 border-[#38444d] rounded-[15px]`,
   profileImage: `rounded-full h-[40px] w-[40px] object-cover`,
@@ -15,11 +16,16 @@ const style = {
   footerIcon: `rounded-full text-lg p-2`,
   postImage: `w-1/2 m-auto outline outline-offset-4 outline-1 outline-[#38444d]`
 };
-const Post = ({ displayName, userName, text, avatar, timestamp, postImage }) => {
+const Post = ({ displayName, userName, text, avatar, timestamp, postImage,re}) => {
+  const router = useRouter()
   return (
     <div className={style.wrapper}>
       <div>
-        <img src={avatar} alt={userName} className={style.profileImage} />
+        {re ? 
+        <img src={avatar} alt={userName} className={`${style.profileImage} cursor-pointer`} onClick={() => {router.push(re)}}/>
+        :
+        <img src={avatar} alt={userName} className={style.profileImage}/>
+}
       </div>
       <div className={style.postMain}>
         <div>
