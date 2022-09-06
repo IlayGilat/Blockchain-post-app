@@ -10,3 +10,8 @@ this is a social media web app integrated with the ethereum blockchain
 * Sanity
 * Alchemy
 * Chackra-Ui
+
+
+## Screenshot
+
+![screenshot](./client/assets/screenshot.png)

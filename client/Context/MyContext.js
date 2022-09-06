@@ -118,7 +118,7 @@ export const MyProvider = ({ children }) => {
     const sanityResponse = await client.fetch(query)
 
     const postQuery = `
-    *[_type == "posts" && author._ref == "${userAccount}" ]{
+    *[_type == "posts" && author._ref == "${userAccount}" ]|order(timestamp desc){
       postText,
         author,
         image,
@@ -195,6 +195,7 @@ export const MyProvider = ({ children }) => {
     }
 
     await client.createOrReplace(mutations);
+    fetchPosts()
   };
 
   const setCurrentUserNFTPFP = async (newNFT) => {
@@ -212,6 +213,7 @@ export const MyProvider = ({ children }) => {
     }
 
     await client.createOrReplace(mutations);
+    fetchPosts()
   };
 
   const connectToWallet = async () => {
